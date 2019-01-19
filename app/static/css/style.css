@@ -1,0 +1,68 @@
+:root {
+    --pri-col: #000000;
+    --sec-col: #e0e0e0;
+    --bg-col: #ffffff;
+}
+
+body {
+    margin: 0px;
+    color: var(--pri-col);
+}
+
+.header {
+    position: relative;
+    text-align: center;
+    font-family: Lato, sans-serif;
+    font-weight: lighter;
+}
+
+h1.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.content {
+    padding: 0px 16px;
+    font-family: Helvetica, sans-serif;
+}
+
+.footer {
+    text-align: center;
+}
+
+.footer p {
+    margin: 8px 0px;
+}
+
+#navbar {
+    overflow: hidden;
+    background-color: var(--pri-col);
+    z-index: 1;
+}
+
+#navbar a {
+    float: left;
+    display: block;
+    color: var(--sec-col);
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-family: Lato, sans-serif;
+    font-weight: lighter;
+}
+
+#navbar a:hover {
+    background-color: var(--sec-col);
+    color: var(--pri-col);
+}
+
+#navbar a.left {
+    font-size: 20px;
+    padding: 0px 12px;
+}
+
+#navbar span.right {
+    float: right;
+}

@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<p>Hello, world!</p>
+<div id='welcome'>
+    dviato is the future.
+    <button type='button'><a href='{{ url_for("login") }}'>Login/Sign up</a></button>
+</div>
 {% endblock %}

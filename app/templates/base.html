@@ -1,10 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
+    {% if title %}
+    <title>{{ title }} | dviato</title>
+    {% else %}
+    <title>dviato</title>
+    {% endif %}
+
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase.js"></script>
+    <script>
+        var config = {
+            apiKey: "AIzaSyD85KAKHVBBOAGAwparRk_DlTPtlFdbraQ",
+            authDomain: "driviauto.firebaseapp.com",
+            databaseURL: "https://driviauto.firebaseio.com",
+            projectId: "driviauto",
+            storageBucket: "driviauto.appspot.com",
+            messagingSenderId: "345486558348"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/2.6.2/firebaseui.js"></script>
+    <script src='{{ url_for("static", filename="js/script.js") }}'></script>
+
+    <link rel='shortcut icon' href='{{ url_for("static", filename="img/favicon.ico") }}'>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.6.2/firebaseui.css">
+    <link type="text/css" rel='stylesheet' href='{{ url_for("static", filename="css/style.css") }}'> 
 </head>
 <body>
+    <div id='navbar'>
+        <a class='left' href='{{ url_for("index") }}'>
+            <span style='position: relative; top: 5px;'>
+                <img src='{{ url_for("static", filename="img/logo-32.png") }}' alt='The dviato logo' title='dviato'>
+                <span style='position: relative; top: -8px;'>dviato</span>
+            </span>
+        </a>
+        <span class='right'>
+            {% if not navbar %}
+                {% set navbar = [
+                    ('login', 'Login/Register')
+                ] %}
+            {% endif %}
+            {% for page, title in navbar %}
+            <a href='{{ url_for(page) }}'>{{ title }}</a>
+            {% endfor %}
+        </span>
+    </div>
+    <div class='header'>
+        <div class='centered'>
+            {% if header %}
+            <h1 class='header'>{{ header }}</h1>
+            {% endif %}
+        </div>
+    </div>
     <div class='content'>
         {% block content %}{% endblock %}
+    </div>
+    <div class='footer'>
+        <p><small>Copyright (c) 2019 dviato.</small></p>
+        <p><small><a href='{{ url_for("privacy") }}'>Privacy policy</a></small></p>
     </div>
 </body>
 </html>
