@@ -22,16 +22,20 @@ def fetch_times(limit):
 
 @app.route('/')
 def index():
-    id_token = flask.request.cookies.get('token')
+    # id_token = flask.request.cookies.get('token')
     return flask.render_template('index.html', header='Driving is better together.')
 
 @app.route('/index')
 def index_():
     return flask.redirect(flask.url_for('index'))
 
+@app.route('/payment')
+def payment():
+    return flask.render_template('payment.html', header='Please make a payment')
+
 @app.route('/login')
 def login():
-    id_token = flask.request.cookies.get('token")
+    id_token = flask.request.cookies.get('token')
     error = None
     claims = None
     times = None
