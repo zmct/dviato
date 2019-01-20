@@ -1,7 +1,9 @@
-from flask import Flask
-from config import Config
+import flask
+import flask_restful
+import config
 
-app = Flask(__name__)
-app.config.from_object(Config)
+app = flask.Flask(__name__)
+app.config.from_object(config.Config)
+api = flask_restful.Api(app)
 
 from app import views
