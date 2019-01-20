@@ -21,7 +21,7 @@
     </script>
     <script src="https://cdn.firebase.com/libs/firebaseui/2.6.2/firebaseui.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <script src='{{ url_for("static", filename="js/script.js") }}'></script>
 
@@ -30,6 +30,7 @@
     <link type="text/css" rel='stylesheet' href='{{ url_for("static", filename="css/style.css") }}'> 
 </head>
 <body>
+    <!--
     <div id='navbar'>
         <a class='left' href='{{ url_for("index") }}'>
             <span style='position: relative; top: 5px;'>
@@ -54,6 +55,7 @@
             {% endfor %}
         </span>
     </div>
+    -->
     <div id='intro-header' class='header'>
         <div class='centered'>
             {% if header %}
@@ -64,10 +66,12 @@
     <div class='content'>
         {% block content %}{% endblock %}
     </div>
+    <!--
     <div class='footer'>
         <p><small>Copyright (c) 2019 dviato.</small></p>
         <p><small><a href='{{ url_for("privacy") }}'>Privacy policy</a></small></p>
     </div>
+    -->
     <script>
     window.addEventListener('load', function () {
         {% block auth_scripts %}

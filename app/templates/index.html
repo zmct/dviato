@@ -7,16 +7,23 @@
 </div>
 <div id='login-info'>
     <h1 id='welcome'></h1>
-    <button id='get' type='button'>Get</button>
+    <button id='get' type='button'>GET</button>
+    <button id='put' type='button'>PUT</button>
+    <p id='data'></p>
 </div>
 <script>
-    const url='http://127.0.0.1:8080/user/vZ9JbTjz8PUIVCrhwyiI0W60K8B3';
-    $('#get').click(function() {
-        console.log('hi');
-        $.get(url, function(data, status) {
-            console.log(`${data}$`);
+    get_uid('vZ9JbTjz8PUIVCrhwyiI0W60K8B3', 'test-property', 'data');
+
+    document.getElementById('put').onclick = function() {
+        const url='http://127.0.0.1:8080/user/vZ9JbTjz8PUIVCrhwyiI0W60K8B3';
+        axios.put(url, {'test-property': true})
+        .then(function(response) {
+            console.log(response);
+        })
+        .catch(function(error) {
+            console.log(error);
         });
-    });
+    };
 </script>
 {% endblock %}
 

@@ -23,28 +23,17 @@ client = datastore.Client()
 
 class UserInfo(flask_restful.Resource):
     def get(self, uid):
-        print(uid)
-        print(get_login())
         if uid == get_login():
             entity = client.get(client.key('user', uid))
             return {key:entity[key] for key in entity}
         else:
             return {}
-    def put(self, uid, **kwargs):
-        print(uid)
-        print(get_login())
-        id_token = flask.request.cookies.get('token')
-        if id_token:
-            print('a')
-        else:
-            print('b')
+    def put(self, uid, *args, **kwargs):
+        print(flask.request.get_json())
         if uid == get_login():
-            print(True)
             entity = datastore.Entity(client.key('user', uid))
-            entity.update(kwargs)
+            entity.update(flask.request.get_json())
             client.put(entity)
-        else:
-            print(False)
     def patch(self, uid, **kwargs):
         if uid == get_login():
             entity = client.get(client.key('user', uid))

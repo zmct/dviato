@@ -20,3 +20,26 @@ window.addEventListener('load', function () {
         alert('Unable to log in: ' + error);
     });
 });
+
+function get_uid(uid, property, id) {
+    const url='http://127.0.0.1:8080/user/' + uid;
+    axios.get(url)
+    .then(function(response) {
+        document.getElementById(id).innerHTML = response['data'][property];
+    })
+    .catch(function(error) {
+        console.log(error);
+    });
+};
+
+function put_uid(uid, property, id) {
+    return function() {
+        const url='http://127.0.0.1:8080/user/' + uid;
+        axios.put(url, {'test-property': true})
+        .then(function(response) {
+            console.log(response);
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+    };
