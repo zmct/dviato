@@ -36,16 +36,22 @@
         </a>
         <span class='right'>
             {% if not navbar %}
-                {% set navbar = [
-                    ('login', 'Login/Register')
-                ] %}
+                {% if logged %}
+                    {% set navbar = [
+                        ('login', 'Logout')
+                    ] %}
+                {% else %}
+                    {% set navbar = [
+                        ('login', 'Login/Register')
+                    ] %}
+                {% endif %}
             {% endif %}
             {% for page, title in navbar %}
             <a href='{{ url_for(page) }}'>{{ title }}</a>
             {% endfor %}
         </span>
     </div>
-    <div class='header'>
+    <div id='intro-header' class='header'>
         <div class='centered'>
             {% if header %}
             <h1 class='header'>{{ header }}</h1>
@@ -59,5 +65,23 @@
         <p><small>Copyright (c) 2019 dviato.</small></p>
         <p><small><a href='{{ url_for("privacy") }}'>Privacy policy</a></small></p>
     </div>
+    <script>
+    window.addEventListener('load', function () {
+        {% block auth_scripts %}
+        {% endblock %}
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                {% block user_scripts %}
+                {% endblock %}
+            } else {
+                {% block nouser_scripts %}
+                {% endblock %}
+            }
+        }, function (error) {
+            console.log(error);
+            alert('Unable to log in: ' + error);
+        });
+    });
+    </script>
 </body>
 </html>

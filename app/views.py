@@ -1,29 +1,25 @@
 import datetime
 import flask
 from google.auth.transport import requests
-from google.cloud import datastore
 import google.oauth2.id_token
 from app import app
 
-client = datastore.Client()
-
-def store_time(dt):
-    entity = datastore.Entity(key=client.key('visit'))
-    entity.update({
-        'timestamp': dt
-    })
-    client.put(entity)
-
-def fetch_times(limit):
-    return
-    query = client.query(kind='visit')
-    query.order = ['-timestamp']
-    return query.fetch(limit=limit)
+def get_login():
+    id_token = flask.request.cookies.get('token')
+    claims = None
+    if id_token:
+        try:
+            claims = google.oauth2.id_token.verify_firebase_token(id_token, requests.Request())
+            logged = True
+        except ValueError:
+            logged = False
+    else:
+        logged = False
+    return logged
 
 @app.route('/')
 def index():
-    id_token = flask.request.cookies.get('token')
-    return flask.render_template('index.html', header='Driving is better together.')
+   return flask.render_template('index.html', logged=get_login(), header='Driving is better together.')
 
 @app.route('/index')
 def index_():
@@ -31,23 +27,12 @@ def index_():
 
 @app.route('/login')
 def login():
-    id_token = flask.request.cookies.get('token")
-    error = None
-    claims = None
-    times = None
-    if id_token:
-        try:
-            claims = google.oauth2.id_token.verify_firebase_token(id_token, requests.Request())
-        except ValueError as exc:
-            error = str(exc)
-        store_time(datetime.datetime.now())
-        times = fetch_times(10)
-    return flask.render_template('login.html', title='login')
+    return flask.render_template('login.html', logged=get_login(), title='login')
 
 @app.route('/terms')
 def terms():
-    return flask.render_template('terms.html', title='terms of service')
+    return flask.render_template('terms.html', logged=get_login(), title='terms of service')
 
 @app.route('/privacy')
 def privacy():
-    return flask.render_template('privacy.html', title='privacy policy')
+    return flask.render_template('privacy.html', logged=get_login(), title='privacy policy')

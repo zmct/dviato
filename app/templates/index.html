@@ -1,8 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div id='welcome'>
+<div id='nosignin'>
     dviato is the future.
     <button type='button'><a href='{{ url_for("login") }}'>Login/Sign up</a></button>
 </div>
+<div id='login-info'>
+    <h1 id='welcome'></h1>
+</div>
+{% endblock %}
+
+{% block user_scripts %}
+document.getElementById('login-info').hidden = false;
+document.getElementById('nosignin').hidden = true;
+document.getElementById('intro-header').hidden = true;
+{% endblock %}
+
+{% block nouser_scripts %}
+document.getElementById('login-info').hidden = true;
+document.getElementById('nosignin').hidden = false;
+document.getElementById('intro-header').hidden = false;
 {% endblock %}

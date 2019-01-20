@@ -2,20 +2,29 @@
 
 {% block content %}
 <div id='firebaseui-auth-container'></div>
-<button id='sign-out' hidden=true>Sign Out</button>
-<div id='login-info' hidden=true>
-  <h2>Login info:</h2>
-  {% if user_data %}
-  <dl>
-      <dt>Name</dt><dd>{{ user_data['name'] }}</dd>
-      <dt>Email</dt><dd>{{ user_data['email'] }}</dd>
-      <dt>Last 10 visits</dt><dd>
-      {% for time in times %}
-      <p>{{ time['timestamp'] }}</p>
-      {% endfor %} </dd>
-  </dl>
-  {% elif error_message %}
-  <p>Error: {{ error_message }}</p>
-  {% endif %}
-</div>
+<button id='sign-out' hidden=true><a href='{{ url_for("index") }}'>Sign Out</a></button>
+{% endblock %}
+
+{% block auth_scripts %}
+var uiConfig = {
+    signInSuccessUrl: '/',
+    signInOptions: [
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        firebase.auth.EmailAuthProvider.PROVIDER_ID,
+    ],
+    tosUrl: 'terms'
+};
+document.getElementById('sign-out').onclick = function () {
+    firebase.auth().signOut();
+};
+{% endblock %}
+
+{% block user_scripts %}
+document.getElementById('sign-out').hidden = false;
+{% endblock %}
+
+{% block nouser_scripts %}
+var ui = new firebaseui.auth.AuthUI(firebase.auth());
+ui.start('#firebaseui-auth-container', uiConfig);
+document.getElementById('sign-out').hidden = true;
 {% endblock %}
