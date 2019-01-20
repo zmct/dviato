@@ -81,6 +81,18 @@ def poolresult():
     logged = uid is not None
     return flask.render_template('poolresult.html', logged=logged, title='Carpool', random=random)
 
+@app.route('/mapsearch')
+def mapsearch():
+    uid = get_login()
+    logged = uid is not None
+    return flask.render_template('mapsearch.html', logged=logged, title='Map search', random=random)
+
+@app.route('/mapsearchdrive')
+def mapsearchdrive():
+    uid = get_login()
+    logged = uid is not None
+    return flask.render_template('mapsearchdrive.html', logged=logged, title='Map search', random=random)
+
 @app.route('/terms')
 def terms():
     uid = get_login()
