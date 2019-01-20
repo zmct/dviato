@@ -6,10 +6,21 @@
     <button type='button'><a href='{{ url_for("login") }}'>Login/Sign up</a></button>
 </div>
 <div id='login-info'>
+    <!--
     <h1 id='welcome'></h1>
     <button id='get' type='button'>GET</button>
     <button id='put' type='button'>PUT</button>
     <p id='data'></p>
+    -->
+    <div style='display: flex; justify-content: space-around; padding: 15% 0% 0% 0%;'>
+        <div>
+            <a href='{{ url_for("drive") }}'><img src='{{ url_for("static", filename="img/drive.png") }}'></img></a>
+        </div>
+        <div>
+            <a href='{{ url_for("pool") }}'><img src='{{ url_for("static", filename="img/diviato-recovered.png") }}'></img></a>
+        </div>
+    </div>
+    <button style='margin: 10% 0% 0% 45%;' type='button'><a href='{{ url_for("login") }}'>Logout</a></button>
 </div>
 <script>
     get_uid('vZ9JbTjz8PUIVCrhwyiI0W60K8B3', 'test-property', 'data');
@@ -34,6 +45,7 @@ document.getElementById('intro-header').hidden = true;
 {% endblock %}
 
 {% block nouser_scripts %}
+window.location = '{{ url_for("login") }}';
 document.getElementById('login-info').hidden = true;
 document.getElementById('nosignin').hidden = false;
 document.getElementById('intro-header').hidden = false;

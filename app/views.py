@@ -1,3 +1,4 @@
+import random
 import datetime
 import flask
 import flask_restful
@@ -50,7 +51,7 @@ api.add_resource(UserInfo, '/user/<string:uid>')
 def index():
     uid = get_login()
     logged = uid is not None
-    return flask.render_template('index.html', logged=logged, header='Driving is better together.')
+    return flask.render_template('index.html', logged=logged)
 
 @app.route('/index')
 def index_():
@@ -60,7 +61,25 @@ def index_():
 def login():
     uid = get_login()
     logged = uid is not None
-    return flask.render_template('login.html', logged=logged, title='login')
+    return flask.render_template('login.html', logged=logged, title='Login')
+
+@app.route('/drive')
+def drive():
+    uid = get_login()
+    logged = uid is not None
+    return flask.render_template('drive.html', logged=logged, title='Drive')
+
+@app.route('/pool')
+def pool():
+    uid = get_login()
+    logged = uid is not None
+    return flask.render_template('pool.html', logged=logged, title='Carpool', random=random)
+
+@app.route('/poolresult')
+def poolresult():
+    uid = get_login()
+    logged = uid is not None
+    return flask.render_template('poolresult.html', logged=logged, title='Carpool', random=random)
 
 @app.route('/terms')
 def terms():

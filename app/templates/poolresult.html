@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style='height: 60vh;'>
+    <div style='height: 10vh;'></div>
+    <img src='{{ url_for("static", filename="img/u356-4.png" if random.randint(0,1)==0 else "img/u450-4.png") }}' style='display: block; margin: auto; width: 50%; background-color: #ffffff'></img>
+</div>
+<div style='background-color: #ffffff;'>
+    <a href='{{ url_for("index") }}'><img src='{{ url_for("static", filename="img/u376-4.png") }}' style='display: block; margin-left: auto; margin-right: auto; width: 50%;'></img></a>
+</div>
+{% endblock %}

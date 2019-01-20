@@ -1,12 +1,13 @@
 :root {
     --pri-col: #000000;
     --sec-col: #e0e0e0;
-    --bg-col: #ffffff;
+    --bg-col: #000000;
 }
 
 body {
     margin: 0px;
     color: var(--pri-col);
+    background-color: var(--bg-col);
 }
 
 .header {

@@ -63,6 +63,9 @@
             {% endif %}
         </div>
     </div>
+    <div style='background-color: #ffffff; margin=0px;'>
+        <a href='{{ url_for("index") }}'><img style='display: block; margin-left: auto; margin-right: auto; width: 50%;' src='{{ url_for("static", filename="img/icon-crop-u140.png") }}'></img></a>
+    </div>
     <div class='content'>
         {% block content %}{% endblock %}
     </div>
