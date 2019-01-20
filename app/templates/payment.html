@@ -4,9 +4,17 @@
 <div id='payment'>
   Please make a payment
   <form>
-    Amount :<br>
-    <input type="number" name="amount"><br>
+    Amount in dollars:<br>
+    <input type="number" name="pay"><br>
   </form>
-  <button type='button'>pay</button>
+  <button type='button'><a href='{{ url_for("payment_post") }}'>Pay</a></button>
 </div>
+<div>
+  Request for money
+  <form>
+    Amount in dollars:<br>
+    <input type="number" name="request"><br>
+  </form>
+  <button type='button'><a href='{{ url_for("payment_post") }}'>Sent request</a></button>
+</div
 {% endblock %}

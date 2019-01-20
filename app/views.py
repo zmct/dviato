@@ -33,6 +33,14 @@ def index_():
 def payment():
     return flask.render_template('payment.html', header='Please make a payment')
 
+@app.route('/payment/post')
+def payment_post():
+    return flask.render_template('payment_post.html', header='Payment is made')
+
+
+
+
+
 @app.route('/login')
 def login():
     id_token = flask.request.cookies.get('token')
